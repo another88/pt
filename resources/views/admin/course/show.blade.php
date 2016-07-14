@@ -19,8 +19,8 @@
                   <div class="btn-group myBtnMarg" style="float: left;">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="/backend/sections/{{$section->id}}/edit">Редактировать</a></li>
-                      <li><a href="/backend/lessons/create/sid/{{$section->id}}">Добавить урок</a></li>
+                      <li><a href="{{ route('admin.sections.edit', $section->id) }}">Редактировать</a></li>
+                      <li><a href="{{ url('/admin/lessons/create/sid/' . $section->id ) }}">Добавить урок</a></li>
                       <li><a href="#">Что-то иное</a></li>
                       <li class="divider"></li>
                       <li><a href="#">Удалить</a></li>

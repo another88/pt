@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\models\CourseSection;
+use App\Models\CourseSection;
 use App\Http\Requests;
 
 class SectionController extends Controller
@@ -18,17 +18,17 @@ class SectionController extends Controller
   public function index()
   {
     $courses = $this->sections->paginate(10);
-    return view('backend.sections.index', compact('courses'))->render();
+    return view('admin.sections.index', compact('courses'))->render();
   }
 
   public function create(CourseSection $section, $cid)
   {
-    return view('backend.sections.form', compact('section','cid'));
+    return view('admin.sections.form', compact('section','cid'));
   }
 
   public function show($id){
     $course = $this->courses->findOrFail($id);
-    return view('backend.sections.show', compact('course'));
+    return view('admin.sections.show', compact('course'));
   }
 
   public function store(Requests\StoreSectionRequest $request){
@@ -39,20 +39,20 @@ class SectionController extends Controller
       $section->save();
     }
 
-    return redirect(route('backend.courses.show', $request->get('cid')))->with('status' ,'Секция создана');
+    return redirect(route('admin.courses.show', $request->get('cid')))->with('status' ,'Секция создана');
   }
 
   public function confirm($id)
   {
     $course = $this->sections->findOrFail($id);
-    return view('backend.sections.confirm', compact('course'));
+    return view('admin.sections.confirm', compact('course'));
   }
 
   public function edit($id)
   {
     $section = $this->sections->findOrFail($id);
     $cid = $section->cid;
-    return view('backend.sections.form', compact('section', 'cid'));
+    return view('admin.sections.form', compact('section', 'cid'));
   }
 
   public function update(Requests\UpdateSectionRequest $request, $id){
@@ -65,13 +65,13 @@ class SectionController extends Controller
       $section->save();
     }
     
-    return redirect(route('backend.sections.edit', $section->id))->with('status' ,'Секция обновлена');
+    return redirect(route('admin.sections.edit', $section->id))->with('status' ,'Секция обновлена');
   }
 
   public function destroy($id)
   {
     $course = $this->sections->findOrFail($id);
     $course->delete();
-    return redirect(route('backend.sections.index'))->with('status' ,'Секция удалена');
+    return redirect(route('admin.sections.index'))->with('status' ,'Секция удалена');
   }
 }

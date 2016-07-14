@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\models\CourseSectionLesson;
+use App\Models\CourseSectionLesson;
 /**
  * Class CourseSection
  */
@@ -25,13 +25,13 @@ class CourseSection extends Model
     protected $guarded = [];
 
     public function course(){
-        return $this->belongsTo('App\models\Course', 'cid');
+        return $this->belongsTo('App\Models\Course', 'cid');
     }
 
 
     public function lessons()
     {
-        return $this->hasMany('App\models\CourseSectionLesson', 'sid', 'id')->orderBy('level', 'asc');
+        return $this->hasMany('App\Models\CourseSectionLesson', 'sid', 'id')->orderBy('level', 'asc');
     }
 
     public function groupLessons(){

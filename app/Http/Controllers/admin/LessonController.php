@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\models\CourseSection;
-use App\models\CourseSectionLesson;
+use App\Models\CourseSection;
+use App\Models\CourseSectionLesson;
 use App\Http\Requests;
 
 class LessonController extends Controller
@@ -19,19 +19,19 @@ class LessonController extends Controller
   public function index()
   {
     $lessons = $this->lessons->paginate(10);
-    return view('backend.lessons.index', compact('lessons'))->render();
+    return view('admin.lessons.index', compact('lessons'))->render();
   }
 
   public function create(CourseSectionLesson $lesson, $sid)
   {
     $section = CourseSection::find($sid);
     $cid = $section->cid;
-    return view('backend.lessons.form', compact('lesson', 'sid', 'cid', 'section'));
+    return view('admin.lessons.form', compact('lesson', 'sid', 'cid', 'section'));
   }
 
   public function show($id){
     $lesson = $this->lessons->findOrFail($id);
-    return view('backend.lessons.show', compact('lesson'));
+    return view('admin.lessons.show', compact('lesson'));
   }
 
   public function store(Requests\StoreLessonRequest $request){
@@ -42,13 +42,13 @@ class LessonController extends Controller
       $lesson->page_image = storeImageFile($file, $lesson, 'sectionLessons');
     }
     $lesson->save();
-    return redirect(route('backend.courses.show', $request->get('cid')))->with('status' ,'Урок создан успешно');
+    return redirect(route('admin.courses.show', $request->get('cid')))->with('status' ,'Урок создан успешно');
   }
 
   public function confirm($id)
   {
     $lesson = $this->lessons->findOrFail($id);
-    return view('backend.lessons.confirm', compact('lesson'));
+    return view('admin.lessons.confirm', compact('lesson'));
   }
 
   public function edit($id)
@@ -57,7 +57,8 @@ class LessonController extends Controller
     $sid = $lesson->sid;
     $section = CourseSection::find($sid);
     $cid = $section->cid;
-    return view('backend.lessons.form', compact('section', 'sid', 'lesson', 'cid'));
+    
+    return view('admin.lessons.form', compact('section', 'sid', 'lesson', 'cid'));
   }
 
   public function update(Requests\StoreLessonRequest $request, $id){
@@ -70,13 +71,13 @@ class LessonController extends Controller
       $lesson->save();
     }
     
-    return redirect(route('backend.lessons.edit', $lesson->id))->with('status' ,'Урок обновлен');
+    return redirect(route('admin.lessons.edit', $lesson->id))->with('status' ,'Урок обновлен');
   }
 
   public function destroy($id)
   {
     $lesson = $this->lessons->findOrFail($id);
     $lesson->delete();
-    return redirect(route('backend.lessons.index'))->with('status' ,'Урок удален');
+    return redirect(route('admin.lessons.index'))->with('status' ,'Урок удален');
   }
 }

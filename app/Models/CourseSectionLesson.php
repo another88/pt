@@ -25,7 +25,7 @@ class CourseSectionLesson extends Model
     ];
 
     public function section(){
-        return $this->belongsTo('App\models\CourseSection', 'sid');
+        return $this->belongsTo('App\Models\CourseSection', 'sid');
     }
 
     protected $guarded = [];

@@ -25,7 +25,7 @@ class Course extends Model
 
     public function sections()
     {
-        $sections = $this->hasMany('App\models\CourseSection', 'cid', 'id');
+        $sections = $this->hasMany('App\Models\CourseSection', 'cid', 'id');
         return $sections;
     }
 }

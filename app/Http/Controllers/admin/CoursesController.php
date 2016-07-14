@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\models\Course;
+use App\Models\Course;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
