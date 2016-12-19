@@ -5,8 +5,9 @@
     <div class="col-md-12">
       <section class="panel">
         <header class="panel-heading">
-          <a href="{{ route('admin.courses.show', $cid) }}" class="btn btn-primary">Вернуть в Курс</a>
+          <a href="{{ route('admin.courses.show', $cid) }}" class="btn btn-primary">Вернуться в Курс</a>
           @if(isset($section->id))
+            <a href="{{ route('admin.sections.show', $section->id) }}" class="btn btn-primary">Просмотр секции</a>
             Редактирование <{{$section->title}}>
           @else
             Создание секции
@@ -25,6 +26,10 @@
           <div class="form-group">
             {!! Form::label('Описание') !!}
             {!! Form::textarea('description', null,['class' => 'form-control']) !!}
+          </div>
+          <div class="form-group">
+            {!! Form::label('Цели/План') !!}
+            {!! Form::textarea('plan', null,['class' => 'form-control']) !!}
           </div>
           @if (!empty($section->page_image))
             <div class="form-group">
@@ -67,6 +72,7 @@
     $(function () {
       CKEDITOR.config.extraPlugins = 'spoiler';
       CKEDITOR.replace('description');
+      CKEDITOR.replace('plan');
     });
   </script>
 @stop

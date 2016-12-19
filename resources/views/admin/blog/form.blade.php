@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.admin')
 @section('title', $post->exists ? 'Editing'. $post->name : 'Создание блога')
 @section('content')
   <div class="row">
@@ -10,7 +10,7 @@
         <div class="panel-body">
           {!! Form::model($post, [
             'method' => $post->exists ? 'put' : 'post',
-            'route' => $post->exists ? ['backend.blog.update', $post->id] : ['backend.blog.store']
+            'route' => $post->exists ? ['admin.blog.update', $post->id] : ['admin.blog.store']
           ]) !!}
           <div class="form-group">
             {!! Form::label('Название') !!}

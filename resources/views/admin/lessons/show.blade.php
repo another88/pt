@@ -8,8 +8,8 @@
           Урок {{$lesson->title}}
         </header>
         <div class="panel-body">
-          <a href="{{ route('backend.admin.edit', $lesson->id) }}" class="btn btn-primary">Редактировать урок</a>
-          <a href="{{ route('backend.admin.show', $lesson->section->course->id) }}" class="btn btn-primary">Вернуться в курс</a>
+          <a href="{{ route('admin.lessons.edit', $lesson->id) }}" class="btn btn-primary">Редактировать урок</a>
+          <a href="{{ route('admin.courses.show', $lesson->section->course->id) }}" class="btn btn-primary">Вернуться в курс</a>
           <section class="panel">
             <header class="panel-heading">
               Описание: {!! $lesson->description !!}

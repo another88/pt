@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CourseSectionLesson;
 /**
  * Class CourseSection
  */
@@ -17,6 +16,7 @@ class CourseSection extends Model
         'title',
         'page_image',
         'description',
+        'plan',
         'weight',
         'enabled',
         'levels'
@@ -31,7 +31,7 @@ class CourseSection extends Model
 
     public function lessons()
     {
-        return $this->hasMany('App\Models\CourseSectionLesson', 'sid', 'id')->orderBy('level', 'asc');
+        return $this->hasMany('App\Models\CourseSectionLesson', 'sid', 'id')->orderBy('weight', 'asc');
     }
 
     public function groupLessons(){

@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="{{ theme('css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ theme('css/backend.css') }}">
-  <link href="/assets/ckeditor/contents.css" rel="stylesheet">
-  <link href="/assets/ckeditor/spoiler.css" rel="stylesheet">
+  <link href="{{theme('ckeditor/contents.css')}}" rel="stylesheet">
+  <link href="{{theme('ckeditor/spoiler.css')}}" rel="stylesheet">
   <link href="{{ theme('css/ionicons.min.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ theme('css/morris/morris.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ theme('css/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css"/>
@@ -21,7 +21,8 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
   <link href="{{ theme('css/bs-datetimepicker/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css"/>
-  <link href="{{ theme('css/jquery-ui.min.css') }}" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="{{ theme('css/frontend.css') }}">
 </head>
 <body id="app-layout" class="skin-black">
 <header class="header">
@@ -230,7 +231,7 @@
             <li class="divider"></li>
 
             <li>
-              <a href="#"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+              <a href="{{ url('/logout') }}"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
             </li>
           </ul>
         </li>
@@ -347,6 +348,8 @@
           {{ $status }}
         </div>
       @endif
+      <div class="alert alert-info" id="alert-info" style="display: none">
+      </div>
       @yield('content')
     </section><!-- /.content -->
     <div class="footer-main">
@@ -355,11 +358,11 @@
   </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="{{theme('ckeditor/ckeditor.js')}}"></script>
 <script src="{{theme('ckeditor/spoiler.js')}}"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
 <script src="{{ theme('js/moment.js') }}" type="text/javascript"></script>
 <script src="{{ theme('js/plugins/chart.js') }}" type="text/javascript"></script>
 <script src="{{ theme('js/plugins/bs-datetimepicker/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>

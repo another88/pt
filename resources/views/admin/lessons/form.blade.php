@@ -47,7 +47,7 @@
           </div>
           <div class="form-group">
             {!! Form::label('Уровень') !!}
-            {!! Form::select('level', range(1, $section->levels), $lesson->level, ['class' => 'form-control']) !!}
+            {!! Form::selectRange('level', 1, $section->levels, $lesson->level , ['class' => 'form-control']) !!}
           </div>
           <div class="form-group">
             {!! Form::label('Ссылка на видео (ютуб)') !!}

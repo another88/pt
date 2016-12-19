@@ -158,6 +158,9 @@ img {
 .margin {
   margin: 10px;
 }
+.pad-10 {
+  padding: 10px;
+}
 .pad-20 {
   padding: 20px;
 }
@@ -3941,7 +3944,6 @@ white-space: nowrap;
 }
 .panel .panel-heading {
 padding: 10px 15px;
-text-transform: uppercase;
 }
 .bg-info {
 background-color: #7acbee;

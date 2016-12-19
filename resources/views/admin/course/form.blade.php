@@ -21,6 +21,10 @@
             {!! Form::textarea('description', null,['class' => 'form-control']) !!}
           </div>
           <div class="form-group">
+            {!! Form::label('Цели/План') !!}
+            {!! Form::textarea('plan', null,['class' => 'form-control']) !!}
+          </div>
+          <div class="form-group">
             {!! Form::label('Вес') !!}
             {!! Form::text('weight', null, ['class' => 'form-control']) !!}
           </div>
@@ -42,6 +46,7 @@
     $(function () {
       CKEDITOR.config.extraPlugins = 'spoiler';
       CKEDITOR.replace('description');
+      CKEDITOR.replace('plan');
     });
   </script>
 @stop

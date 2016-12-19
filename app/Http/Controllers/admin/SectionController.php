@@ -27,19 +27,19 @@ class SectionController extends Controller
   }
 
   public function show($id){
-    $course = $this->courses->findOrFail($id);
-    return view('admin.sections.show', compact('course'));
+    $section = $this->sections->findOrFail($id);
+    return view('admin.sections.show', compact('section'));
   }
 
   public function store(Requests\StoreSectionRequest $request){
-    $section = $this->sections->create(['user_id' => auth()->user()->id] + $request->only('title', 'description', 'enabled', 'weight', 'cid'));
+    $section = $this->sections->create(['user_id' => auth()->user()->id] + $request->only('title', 'description', 'enabled', 'weight', 'cid', 'plan'));
     $file = $request->file('page_image');
     if($file){
       $section->page_image = storeImageFile($file, $section, 'courseSections');
       $section->save();
     }
 
-    return redirect(route('admin.courses.show', $request->get('cid')))->with('status' ,'Секция создана');
+    return redirect(route('admin.sections.show', $section->id))->with('status' ,'Секция создана');
   }
 
   public function confirm($id)
@@ -57,7 +57,7 @@ class SectionController extends Controller
 
   public function update(Requests\UpdateSectionRequest $request, $id){
     $section = $this->sections->findOrFail($id);
-    $section->fill($request->only('title', 'enabled', 'description','weight'))->save();
+    $section->fill($request->only('title', 'enabled', 'description','weight','plan'))->save();
 
     $file = $request->file('page_image');
     if($file){

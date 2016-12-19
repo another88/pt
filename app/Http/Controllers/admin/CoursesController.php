@@ -13,14 +13,15 @@ class CoursesController extends Controller
 {
   protected $courses;
 
-  public function __construct(Course $courses){
+  public function __construct(Course $courses)
+  {
     $this->courses = $courses;
     parent::__construct();
   }
 
   public function index()
   {
-    $courses = $this->courses->paginate(10);
+    $courses = Course::orderBy('weight', 'asc')->paginate(10);
     return view('admin.course.index', compact('courses'))->render();
   }
 
@@ -29,14 +30,16 @@ class CoursesController extends Controller
     return view('admin.course.form', compact('course'));
   }
 
-  public function show($id){
+  public function show($id)
+  {
     $course = $this->courses->findOrFail($id);
     return view('admin.course.show', compact('course'));
   }
 
-  public function store(Requests\StoreCourseRequest $request){
-    $this->courses->create(['user_id' => auth()->user()->id] + $request->only('title', 'description', 'enabled'));
-    return redirect(route('admin.courses.index'))->with('status' ,'Курс создан успешно');
+  public function store(Requests\StoreCourseRequest $request)
+  {
+    $this->courses->create(['user_id' => auth()->user()->id] + $request->only('title', 'description', 'enabled', 'plan'));
+    return redirect(route('admin.courses.index'))->with('status', 'Курс создан успешно');
   }
 
   public function confirm($id)
@@ -51,16 +54,17 @@ class CoursesController extends Controller
     return view('admin.course.form', compact('course'));
   }
 
-  public function update(Requests\UpdateCourseRequest $request, $id){
+  public function update(Requests\UpdateCourseRequest $request, $id)
+  {
     $course = $this->courses->findOrFail($id);
-    $course->fill($request->only('title', 'enabled', 'description','weight'))->save();
-    return redirect(route('admin.courses.edit', $course->id))->with('status' ,'Курс обновлен');
+    $course->fill($request->only('title', 'enabled', 'description', 'weight', 'plan'))->save();
+    return redirect(route('admin.courses.edit', $course->id))->with('status', 'Курс обновлен');
   }
 
   public function destroy($id)
   {
     $course = $this->courses->findOrFail($id);
     $course->delete();
-    return redirect(route('admin.course.index'))->with('status' ,'Курс удален');
+    return redirect(route('admin.course.index'))->with('status', 'Курс удален');
   }
 }

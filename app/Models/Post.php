@@ -4,13 +4,12 @@ namespace App\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
-use Laracasts\Presenter\PresentableTrait;
+use App\Presenters\PostPresenter;
+use McCool\LaravelAutoPresenter\HasPresenter;
 
-class Post extends Model
+class Post extends Model implements HasPresenter
 {
-  use PresentableTrait;
-  public $presenter = 'App\Presenters\PostPresenter';
-
+  
   protected $fillable = ['user_id', 'title', 'body', 'slug', 'excerpt', 'published_at'];
 
   protected $dates = ['published_at'];
@@ -21,5 +20,10 @@ class Post extends Model
 
   public function user(){
     return $this->belongsTo(User::class);
+  }
+
+  public function getPresenterClass()
+  {
+    return PostPresenter::class;
   }
 }

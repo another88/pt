@@ -42,7 +42,7 @@ class LessonController extends Controller
       $lesson->page_image = storeImageFile($file, $lesson, 'sectionLessons');
     }
     $lesson->save();
-    return redirect(route('admin.courses.show', $request->get('cid')))->with('status' ,'Урок создан успешно');
+    return redirect(route('admin.sections.show', $lesson->sid))->with('status' ,'Урок создан успешно');
   }
 
   public function confirm($id)
@@ -63,7 +63,7 @@ class LessonController extends Controller
 
   public function update(Requests\StoreLessonRequest $request, $id){
     $lesson = $this->lessons->findOrFail($id);
-    $lesson->fill($request->only('title', 'enabled', 'body','weight', 'youtube', 'description'))->save();
+    $lesson->fill($request->only('title', 'enabled', 'body','weight', 'youtube', 'description', 'level'))->save();
 
     $file = $request->file('page_image');
     if($file){

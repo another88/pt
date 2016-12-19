@@ -3,26 +3,35 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Laracasts\Presenter\PresentableTrait;
+use App\Presenters\PagePresenter;
+use McCool\LaravelAutoPresenter\HasPresenter;
+
 /**
  * Class Page
  */
-class Page extends Model
+class Page extends Model implements HasPresenter
 {
-    use PresentableTrait;
-    public $presenter = 'App\Presenters\PagePresenter';
 
-    public $timestamps = true;
+  public $timestamps = true;
 
-    protected $fillable = [
-        'category_id',
-        'title',
-        'uri',
-        'content',
-        'published_at'
-    ];
+  protected $fillable = [
+    'category_id',
+    'title',
+    'uri',
+    'content',
+    'published_at'
+  ];
 
-    protected $guarded = [];
+  protected $guarded = [];
 
-        
+  public function getPresenterClass()
+  {
+    return PagePresenter::class;
+  }
+
+  public function scopeUrl($query, $url)
+  {
+    return $query->where('uri', $url);
+  }
+
 }

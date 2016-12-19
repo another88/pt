@@ -10,25 +10,32 @@ use Illuminate\Database\Eloquent\Model;
 class CourseSectionLesson extends Model
 {
 
-    public $timestamps = true;
+  public $timestamps = true;
 
-    protected $fillable = [
-        'sid',
-        'title',
-        'body',
-        'page_image',
-        'youtube',
-        'weight',
-        'level',
-        'description',
-        'enabled'
-    ];
+  protected $fillable = [
+    'sid',
+    'title',
+    'body',
+    'page_image',
+    'youtube',
+    'weight',
+    'level',
+    'description',
+    'enabled'
+  ];
 
-    public function section(){
-        return $this->belongsTo('App\Models\CourseSection', 'sid');
-    }
+  public function section()
+  {
+    return $this->belongsTo('App\Models\CourseSection', 'sid');
+  }
 
-    protected $guarded = [];
+  public function getNextId()
+  {
+    $lesson = self::where('weight', '>', $this->weight)->where('sid', $this->sid)->firstOrFail();
+    return $lesson->id;
+  }
 
-        
+  protected $guarded = [];
+
+
 }

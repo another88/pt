@@ -10,22 +10,37 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
 
-    public $timestamps = true;
+  public $timestamps = true;
 
-    protected $fillable = [
-        'description',
-        'title',
-        'weight',
-        'enabled',
-        'page_image',
-        'meta_description'
-    ];
+  protected $fillable = [
+    'description',
+    'plan',
+    'title',
+    'weight',
+    'enabled',
+    'page_image',
+    'meta_description'
+  ];
 
-    protected $guarded = [];
+  protected $guarded = [];
 
-    public function sections()
-    {
-        $sections = $this->hasMany('App\Models\CourseSection', 'cid', 'id');
-        return $sections;
-    }
+  public function sections()
+  {
+    $sections = $this->hasMany('App\Models\CourseSection', 'cid', 'id')->orderBy('weight', 'asc');
+    return $sections;
+  }
+
+  public function scopeEnabled($query, $flag)
+  {
+    return $query->where('courses.enabled', $flag)->orderBy('weight', 'asc');
+  }
+
+  public function scopeFavorite($query)
+  {
+    return $query->join('user_courses','user_courses.course_id','=','courses.id');
+  }
+
+  public function getProgressBar(){
+
+  }
 }

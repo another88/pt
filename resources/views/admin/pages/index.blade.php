@@ -23,7 +23,7 @@
           {{$page->category_id}}
         </td>
         <td>
-          <a href="{{ url($page->uri) }}">{{$page->present()->prettyUri}}</a>
+          <a href="{{ url($page->uri) }}">{{$page->prettyUri}}</a>
         </td>
         <td>
           <a class="span glyphicon glyphicon-edit" href="{{ route('admin.pages.edit', $page->id) }}"></a>

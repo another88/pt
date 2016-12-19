@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.admin')
 @section('title','Блоги')
 @section('content')
   <div class="row">
@@ -8,7 +8,7 @@
           Блог посты
         </header>
         <div class="panel-body">
-          <a href="{{ route('backend.blog.create') }}" class="btn btn-primary">Создать блог</a>
+          <a href="{{ route('admin.blog.create') }}" class="btn btn-primary">Создать блог</a>
           <table class="table table-hover">
             <thead>
             <tr>
@@ -22,9 +22,9 @@
             </thead>
             <tbody>
             @foreach($posts as $post)
-              <tr class="{{$post->present()->publishedDateHighlight}}">
+              <tr class="{{$post->publishedDateHighlight}}">
                 <td>
-                  <a href="{{ route('backend.blog.edit', $post->id) }}">{{$post->title}}</a>
+                  <a href="{{ route('admin.blog.edit', $post->id) }}">{{$post->title}}</a>
                 </td>
                 <td>
                   {{$post->slug}}
@@ -33,13 +33,13 @@
                   {{$post->user->name}}
                 </td>
                 <td>
-                  {{$post->present()->publishedDate}}
+                  {{$post->published_at}}
                 </td>
                 <td>
-                  <a class="span glyphicon glyphicon-edit" href="{{ route('backend.blog.edit', $post->id) }}"></a>
+                  <a class="span glyphicon glyphicon-edit" href="{{ route('admin.blog.edit', $post->id) }}"></a>
                 </td>
                 <td>
-                  <a class="span glyphicon glyphicon-remove" href="{{ route('backend.blog.confirm', $post->id) }}"></a>
+                  <a class="span glyphicon glyphicon-remove" href="{{ route('admin.blog.confirm', $post->id) }}"></a>
                 </td>
               </tr>
             @endforeach
